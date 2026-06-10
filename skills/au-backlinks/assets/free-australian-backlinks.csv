@@ -1,0 +1,56 @@
+Tier,Tier Name,Category,Platform,URL,Why it matters,Done?
+1,Free .gov.au backlinks,NSW,buy.nsw Supplier Hub,https://buy.nsw.gov.au/suppliers,State supplier registry on a .gov.au domain. Real authority link.,FALSE
+1,Free .gov.au backlinks,VIC,Buying for Victoria – Supplier Hub,https://www.buyingfor.vic.gov.au/,Victorian central supplier registration.,FALSE
+1,Free .gov.au backlinks,QLD,Queensland Supplier Portal,https://www.supply.qld.gov.au/,QLD govt supplier portal (mid-migration in 2026 — current entry point).,FALSE
+1,Free .gov.au backlinks,SA,Shared Services SA – Register my business,https://npe.sharedservices.sa.gov.au/services/register-my-business,SA government vendor registration.,FALSE
+1,Free .gov.au backlinks,WA,Tenders WA,https://www.tenders.wa.gov.au/,"WA supplier account, free. ABN required.",FALSE
+1,Free .gov.au backlinks,TAS,Tenders Tasmania,https://www.tenders.tas.gov.au/registration,Tasmanian govt supplier registration.,FALSE
+1,Free .gov.au backlinks,NT,Quotations & Tenders Online (QTOL),https://tendersonline.nt.gov.au/,NT supplier registration + opportunity alerts.,FALSE
+1,Free .gov.au backlinks,ACT,Procurement ACT – Supplier Registration,https://www.procurement.act.gov.au/supplying-to-act-government/act-government-supplier-registration,ACT supplier SmartForm registration.,FALSE
+1,Free .gov.au backlinks,Federal,AusTender,https://www.tenders.gov.au/,"Federal govt supplier registry. Free, ~15 min.",FALSE
+1,Free .gov.au backlinks,National,ICN Gateway,https://gateway.icn.org.au/,"Free national supplier profile that FEEDS buy.nsw. Two links, one form.",FALSE
+1b,Council / local-gov layer,Councils (VIC/NSW/QLD),VendorPanel Marketplace,https://vendorpanel.com/industries/local-government,Platform most councils use. Free supplier registration. Near-mandatory for council work.,FALSE
+1b,Council / local-gov layer,QLD councils + state,Local Buy,https://www.localbuy.net.au/Home,LGAQ-owned. QLD state + council opportunities in one place.,FALSE
+1b,Council / local-gov layer,NSW councils,Local Government Procurement (LGP),https://lgp.org.au/,NSW council panels.,FALSE
+1b,Council / local-gov layer,National councils,LGCA – National Supplier Register,https://lgca.com.au/supplier-registration/,Free national register open to all 537 councils. Pre-qualify once.,FALSE
+2,Non-negotiables (do first),Search/Maps,Google Business Profile,https://business.google.com,~93% of AU search. The single most important listing.,FALSE
+2,Non-negotiables (do first),Search/Maps,Bing Places,https://www.bingplaces.com,Feeds Copilot + ChatGPT search.,FALSE
+2,Non-negotiables (do first),Search/Maps,Apple Business Connect,https://businessconnect.apple.com,Apple Maps + Siri.,FALSE
+2,Non-negotiables (do first),Professional,LinkedIn Company Page,https://www.linkedin.com,High DA + strongest entity signal.,FALSE
+3,Core AU directories,Directory,True Local,https://www.truelocal.com.au,"AU's premier directory. Dofollow, high DA.",FALSE
+3,Core AU directories,Directory,Yellow Pages,https://www.yellowpages.com.au,"Exceptional DA, highly trusted.",FALSE
+3,Core AU directories,Directory,White Pages,https://www.whitepages.com.au,Exceptional DA.,FALSE
+3,Core AU directories,Directory,Localsearch,https://www.localsearch.com.au,Strong AU local directory.,FALSE
+3,Core AU directories,Directory,Yelp Australia,https://www.yelp.com.au,"Indexed fast, high trust.",FALSE
+3,Core AU directories,Directory,Hotfrog,https://www.hotfrog.com.au,DA ~48. Free + premium.,FALSE
+3,Core AU directories,Directory,Word of Mouth,https://www.wordofmouth.com.au,DA ~44. Category-organised.,FALSE
+3,Core AU directories,Directory,StartLocal,https://www.startlocal.com.au,Dofollow link.,FALSE
+3,Core AU directories,Directory,SuperPages,https://www.superpages.com.au,Dofollow link.,FALSE
+3,Core AU directories,Directory,Pink Pages,https://www.pinkpages.com.au,General AU directory.,FALSE
+3,Core AU directories,Directory,AussieWeb,https://www.aussieweb.com.au,Long-running AU directory.,FALSE
+3,Core AU directories,Directory,dLook,https://www.dlook.com.au,AU business directory.,FALSE
+4,Global high-DA profiles,Authority,Crunchbase,https://www.crunchbase.com,DA ~91. Extraordinary free link.,FALSE
+4,Global high-DA profiles,Service biz,Clutch,https://clutch.co,DA ~83. Dofollow + buyer-intent traffic. Gold for agencies/services.,FALSE
+4,Global high-DA profiles,Software,G2,https://www.g2.com,SaaS/software authority.,FALSE
+4,Global high-DA profiles,Startup,Product Hunt,https://www.producthunt.com,Launch + profile link.,FALSE
+4,Global high-DA profiles,Startup,F6S,https://www.f6s.com,Used by accelerators + gov innovation programs.,FALSE
+4,Global high-DA profiles,Startup,Wellfound (AngelList),https://wellfound.com,Startup profile + jobs.,FALSE
+4,Global high-DA profiles,Service biz,GoodFirms,https://www.goodfirms.co,Service provider directory.,FALSE
+4,Global high-DA profiles,Profile,About.me,https://about.me,High-DA profile link.,FALSE
+4,Global high-DA profiles,Profile,Behance,https://www.behance.net,Portfolio profile (creative).,FALSE
+4,Global high-DA profiles,Profile,GitHub,https://github.com,High-DA profile/org link (tech).,FALSE
+5,Industry-specific,Trades,hipages,https://www.hipages.com.au,#1 tradie platform. Leads + citation.,FALSE
+5,Industry-specific,Trades,ServiceSeeking,https://www.serviceseeking.com.au,Trade services bidding + SEO value.,FALSE
+5,Industry-specific,Trades,Oneflare,https://www.oneflare.com.au,Services marketplace.,FALSE
+5,Industry-specific,Health,HealthEngine,https://healthengine.com.au,Medical directory + bookings.,FALSE
+5,Industry-specific,Health,HotDoc,https://www.hotdoc.com.au,Medical booking + citation.,FALSE
+5,Industry-specific,Tourism,ATDW,https://www.atdw.com.au,"Gov-backed, FREE, syndicates to ~50 sites incl. australia.com.",FALSE
+5,Industry-specific,Tourism,Tripadvisor,https://www.tripadvisor.com.au,Hospitality/tourism authority.,FALSE
+5,Industry-specific,Hospitality,Australian Good Food Guide,https://www.agfg.com.au,Restaurants/food venues.,FALSE
+5,Industry-specific,Legal,State Law Society directories,https://www.lawcouncil.au/about-us/state-and-territory-law-societies,Find your state's Law Society/Institute member directory.,FALSE
+5,Industry-specific,Legal,Australian Lawyers Directory,https://www.australianlawyersdirectory.com.au,Legal vertical directory.,FALSE
+6,Review / trust layer,Reviews,ProductReview.com.au,https://www.productreview.com.au,AU's dominant review site. High trust signal.,FALSE
+6,Review / trust layer,Reviews,Trustpilot,https://www.trustpilot.com,Global review/trust authority.,FALSE
+7,Data aggregators (multipliers),Aggregator,Foursquare,https://foursquare.com,"Feeds Apple Maps, Uber, thousands of apps from one submission.",FALSE
+7,Data aggregators (multipliers),Aggregator,Data Axle,https://www.data-axle.com,"400+ platforms, strong B2B.",FALSE
+7,Data aggregators (multipliers),Aggregator,Neustar Localeze / TransUnion,https://www.transunion.com,"Feeds Bing, Apple, navigation systems.",FALSE

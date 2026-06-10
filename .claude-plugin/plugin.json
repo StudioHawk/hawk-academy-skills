@@ -1,6 +1,8 @@
 {
   "name": "hawk-academy-skills",
-  "description": "Hawk Academy Workshop SEO skills for StudioHawk's HawkOS Lite.",
-  "version": "1.0.0",
-  "author": { "name": "StudioHawk" }
+  "description": "The 16 Hawk Academy Workshop SEO skills: audits, IA, content engine, local SEO, backlinks, digital PR, UX, GA4 and roadmap.",
+  "version": "2.0.0",
+  "author": {
+    "name": "StudioHawk"
+  }
 }

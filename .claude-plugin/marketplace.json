@@ -1,11 +1,13 @@
 {
   "name": "hawkos-lite",
-  "owner": { "name": "StudioHawk" },
+  "owner": {
+    "name": "StudioHawk"
+  },
   "plugins": [
     {
       "name": "hawk-academy-skills",
       "source": "./",
-      "description": "Hawk Academy Workshop SEO skills — content briefs, IA maps, local SEO audits, topic clusters."
+      "description": "The 16 Hawk Academy Workshop SEO skills: audits, IA, content engine, local SEO, backlinks, digital PR, UX, GA4 and roadmap."
     }
   ]
 }
