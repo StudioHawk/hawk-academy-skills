@@ -78,6 +78,10 @@ For each phase: **Objective · Actions** (pulled from the parked items, briefs, 
 Open with a **"Where you are now"** baseline (from the audit) and a **"First 2 weeks"** kickstart; close with
 the **one thing to protect time for each month**.
 
+**Bake in a measurement loop.** Traditional SEO isn't the only scoreboard anymore, so make AI visibility a tracked KPI, not an afterthought:
+- In "Where you are now", record today's **AI-visibility baseline**: check the **Generative AI performance report in Google Search Console** (Search Console → Performance → Search results, filter to the generative AI surfaces; launched June 2026, rolling out by region, so note if it isn't in their account yet), and note whether the brand is currently cited when you ask ChatGPT, Perplexity and Google AI Mode the top 3 questions from `business-context.md`.
+- Add a recurring **monthly AI-visibility check** to every phase: re-run those same questions and screenshot the GSC generative-AI impressions. Month-on-month movement in *citations and AI impressions* is the KPI that tells the owner the work is landing, well before organic rankings shift.
+
 Render the doc: assemble the JSON (schema in `scripts/build_roadmap_docx.py`) and run:
 ```
 python3 scripts/build_roadmap_docx.py ./roadmap.json "<workspace>"

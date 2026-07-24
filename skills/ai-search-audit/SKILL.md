@@ -1,7 +1,7 @@
 ---
 name: ai-search-audit
 description: >
-  Full-featured SEO, GEO, and AEO website audit tool. Analyzes any URL or website for Search Engine Optimization (SEO), Generative Engine Optimization (GEO — for AI-powered search engines like Perplexity, ChatGPT Search, and Gemini), and Answer Engine Optimization (AEO — for featured snippets and voice search). Use this skill whenever a user provides a URL, domain, or website and asks about search performance, SEO issues, rankings, AI search readiness, answer engine visibility, meta tags, schema markup, content quality, or visibility in search. Also trigger when the user asks to "audit my site", "check my SEO", "why isn't my site ranking", "optimize for AI search", or any similar request involving a web property and search performance.
+  Full-featured SEO, GEO, and AEO website audit tool. Analyzes any URL or website for Search Engine Optimization (SEO), Generative Engine Optimization (GEO — for AI-powered search engines like Perplexity, ChatGPT Search, Google AI Overviews, Google AI Mode, and Gemini, including an explicit AI-crawler robots.txt check), and Answer Engine Optimization (AEO — for featured snippets and voice search). Use this skill whenever a user provides a URL, domain, or website and asks about search performance, SEO issues, rankings, AI search readiness, answer engine visibility, meta tags, schema markup, content quality, or visibility in search. Also trigger when the user asks to "audit my site", "check my SEO", "why isn't my site ranking", "optimize for AI search", or any similar request involving a web property and search performance.
 ---
 
 # AI Search Audit Skill
@@ -101,7 +101,9 @@ Work through each category systematically. Your analysis covers the **whole site
 
 ### GEO Signals (Generative Engine Optimization)
 
-GEO optimizes for AI-powered search engines (Perplexity, ChatGPT Search, Google AI Overviews, Gemini) that synthesize answers from multiple sources and cite pages. These engines reward clarity, authority, and factual richness.
+GEO optimizes for AI-powered search engines (Perplexity, ChatGPT Search, Google AI Overviews, Google AI Mode, Gemini) that synthesize answers from multiple sources and cite pages. These engines reward clarity, authority, and factual richness.
+
+Note two distinct Google surfaces, because they now behave and report differently: **AI Overviews** (the AI summary above the blue links) and **AI Mode** (the full conversational search experience Google is steering users toward). As of June 2026, Search Console's new Generative AI performance report isolates impressions from each. Treat visibility in both as the goal, and mention the report as where the client will see it.
 
 **E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness):**
 - **Author information**: Named authors with credentials visible?
@@ -121,8 +123,22 @@ GEO optimizes for AI-powered search engines (Perplexity, ChatGPT Search, Google 
 **Technical GEO:**
 - **Structured data depth**: Beyond basic schema, does the page use rich, specific types (Author, Dataset, ClaimReview, SpeakableSpecification)?
 - **HTTPS / security**: Secure site (trust signal for AI engines)?
-- **Clean crawlability**: No robots.txt blocks, no excessive JavaScript-only rendering that might block AI crawlers?
-- **Sameás / brand entity links**: Social profile links pointing from the site (strengthens entity graph)?
+- **AI crawler access (check `robots.txt` explicitly)**: The single highest-leverage GEO fix. Fetch `{domain}/robots.txt` and check for `Disallow` rules against each user-agent below. Report each as ALLOWED or BLOCKED. This is the finding most site owners have never checked, and blocking the wrong bot silently removes them from AI citations.
+
+  | User-agent | Engine | Purpose | Blocking it means |
+  |---|---|---|---|
+  | `GPTBot` | OpenAI | Trains future models | A defensible business choice; no direct citation impact |
+  | `OAI-SearchBot` | OpenAI | Powers ChatGPT Search results | You disappear from ChatGPT Search citations |
+  | `ChatGPT-User` | OpenAI | Live fetch when a user asks about your page | ChatGPT can't read your page on request |
+  | `PerplexityBot` | Perplexity | Indexes pages for Perplexity | No Perplexity citations |
+  | `Perplexity-User` | Perplexity | Live user-triggered fetch | Perplexity can't fetch your page on request |
+  | `ClaudeBot` | Anthropic | Training and retrieval | Invisible to Claude |
+  | `Google-Extended` | Google | Gemini + AI Overviews / AI Mode grounding | Excluded from Google's generative answers |
+
+  Draw the distinction out loud: blocking a **training** bot (`GPTBot`, `Google-Extended`) is a legitimate call. Blocking a **retrieval** bot (`OAI-SearchBot`, `ChatGPT-User`, `PerplexityBot`, `Perplexity-User`) directly kills live citations and is almost always accidental. If any retrieval bot is blocked, flag it as a P0.
+- **llms.txt**: Fetch `{domain}/llms.txt`. This emerging standard gives AI engines a plain-markdown map of a site's most important pages. Present? If missing, note it as a cheap quick win, not a critical failure.
+- **Clean rendering**: Is the core content in the raw HTML, not locked behind JavaScript-only rendering? AI crawlers generally do **not** execute JavaScript, so client-rendered content can be invisible to them even when it looks perfect in a browser.
+- **sameAs / brand entity links**: Social profile links pointing from the site (strengthens the entity graph)?
 
 ### AEO Signals (Answer Engine Optimization)
 
@@ -326,7 +342,7 @@ Packer.toBuffer(doc).then(buffer => {
 });
 ```
 
-Use a filename like `seo-audit-example-com-2025-03-13.docx` (domain with hyphens, ISO date).
+Use a filename like `seo-audit-example-com-2026-07-15.docx` (domain with hyphens, current ISO date).
 
 ### Validate
 
@@ -367,7 +383,7 @@ Your audit report is ready:
 
 **Be specific, not generic.** Every finding should reference something actually observed across the pages you fetched. Avoid boilerplate advice that could apply to any website. If the title is "Welcome to Our Website" — say that. If a page you fetched is missing an H1 — say which page. Quote actual text when it helps illustrate the point.
 
-**Be honest about what you can and can't assess.** Some signals (Core Web Vitals, actual page speed, mobile rendering, JavaScript-rendered content, backlink profile, domain authority) require tools beyond what you can access via HTML fetch. When this comes up, name the tool that can assess it (e.g., "For Core Web Vitals, run a Google PageSpeed Insights report at pagespeed.web.dev") rather than guessing.
+**Be honest about what you can and can't assess.** Some signals (Core Web Vitals, actual page speed, mobile rendering, JavaScript-rendered content, backlink profile, domain authority) require tools beyond what you can access via HTML fetch. When this comes up, name the tool that can assess it (e.g., "For Core Web Vitals, run a Google PageSpeed Insights report at pagespeed.web.dev") rather than guessing. For whether the site is *actually being surfaced* in AI search, point the client to the **Generative AI performance report in Google Search Console** (launched June 2026), which now isolates AI Overviews and AI Mode impressions, the closest thing to a real AI-visibility scoreboard.
 
 **Calibrate tone to the findings.** If a site is genuinely in good shape, say so — don't manufacture problems. If it has serious issues, communicate urgency without being alarmist.
 
