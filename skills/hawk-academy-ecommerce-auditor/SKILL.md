@@ -73,12 +73,21 @@ crawling, and warn that the default crawl is polite but still hits the live site
 ### Step 2 — Crawl the store
 
 Use the bundled wrapper, which drives the same free SiteOne crawler the
-`siteone-technical-audit` skill uses (no Screaming Frog licence needed). It
-saves a full **offline HTML export** plus a JSON inventory — the offline HTML is
-what lets the analyser read schema, headings and copy.
+`site-crawler` skill uses (no Screaming Frog licence needed). It saves a full
+**offline HTML export** plus a JSON inventory — the offline HTML is what lets
+the analyser read schema, headings and copy, and the JSON inventory is what
+tells it the real URL and status code of every page.
 
 ```bash
 bash scripts/run_crawl.sh "<store-url>" "<work-dir>/crawl" <max-depth>
+```
+
+On Windows, `bash` works if the attendee has Git Bash (Claude Code installs it).
+If they don't, use the PowerShell wrapper instead, which is identical in
+behaviour and output:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\run_crawl.ps1 -Url "<store-url>" -OutDir "<work-dir>\crawl" -MaxDepth 3
 ```
 
 - `<work-dir>` — a scratch directory for this audit.
@@ -87,14 +96,24 @@ bash scripts/run_crawl.sh "<store-url>" "<work-dir>/crawl" <max-depth>
   for deep stores, or for a fast smoke test add `--max-visited-urls=400` as an
   extra flag.
 
-The wrapper auto-installs `siteone-crawler` via Homebrew on first run. If that
-fails it prints the exact command the attendee needs — relay it and stop.
+**Installing the crawler.** The wrapper finds or installs it automatically, and
+works the same on macOS (Apple Silicon and Intel), Windows and Linux. There is
+no Homebrew dependency and no admin rights are needed. It looks in this order:
+`$SITEONE_CRAWLER`, then `siteone-crawler` on PATH, then a previous install in
+the home directory, then the binary bundled with the sibling `site-crawler`
+skill, and only then falls back to downloading the official release. If every
+option fails it prints the manual download link and the environment variable to
+set — relay that and stop.
 
 **robots.txt:** the wrapper copies robots.txt out of the offline export if the
-crawler saved it. If it reports that robots.txt is missing, fetch it yourself
-with the `web_fetch` tool (robots.txt is plain text — it renders fine) and save
-the raw contents to `<work-dir>/crawl/robots.txt` before the next step. Do not
-use curl/wget for this.
+crawler saved it. In practice the crawler reads robots.txt to decide what it may
+fetch but does not write it into the export, so expect the wrapper to print
+`ROBOTS_MISSING` on most runs. That is normal, not a failure. When it does,
+fetch `<store-url>/robots.txt` yourself with the `web_fetch` tool (robots.txt is
+plain text — it renders fine) and save the raw contents to
+`<work-dir>/crawl/robots.txt` before the next step. Do not use curl/wget for
+this. Skipping it costs you the whole robots.txt section of the audit, which is
+where the most expensive mistakes usually hide.
 
 ### Step 3 — Run the analyser
 
@@ -111,6 +130,16 @@ schema validation, ABF/BTF word counts on category pages, product-page
 best-practice flags, blog tie-back flags, return/about/seasonal page hits, and a
 robots.txt analysis. It uses only the Python standard library, so it runs on a
 fresh laptop. (If `python-docx` is missing it's only needed in Step 5, not here.)
+
+On Windows use `python` instead of `python3` if `python3` isn't on the PATH.
+
+It reads `crawl.json` to get each page's real URL and status code, so error
+pages and redirect stubs are excluded automatically. `meta.notes` records
+anything that limits the audit (a thin crawl, sampling caps, a missing
+inventory) — read it and carry those limitations into the report rather than
+writing around them. `meta.thresholds` lists the word counts behind the
+ABF/BTF and intro checks, so you can state them if the attendee questions a
+call.
 
 Read `findings.json`. It's the evidence base for your judgement — **don't invent
 findings that aren't in it.** If the crawl came back thin (e.g. 0 product pages
@@ -241,7 +270,14 @@ infer what you can and mark the rest as not assessable.
 ## Bundled resources
 
 - `scripts/run_crawl.sh` — SiteOne crawl wrapper (offline HTML + JSON + robots).
+  Cross-platform: macOS, Linux, and Windows via Git Bash. No Homebrew.
+- `scripts/run_crawl.ps1` — the same wrapper for Windows attendees without Git
+  Bash. Same flags, same outputs.
 - `scripts/analyze_ecommerce.py` — turns the crawl into `findings.json` (stdlib
   only).
 - `scripts/build_ecommerce_docx.py` — renders the branded report; the JSON
   schema it expects is documented in its header docstring.
+
+Both crawl wrappers reuse the binary bundled with the sibling `site-crawler`
+skill when it is installed, so a workshop laptop that has already run that skill
+does not download anything.
